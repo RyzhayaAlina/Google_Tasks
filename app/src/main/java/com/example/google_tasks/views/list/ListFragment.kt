@@ -29,8 +29,6 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initialRecyclerView()
 
-        viewModel.fetchData()
-
         viewModel.tasks.observe(viewLifecycleOwner) {
             adapter.tasks = it.toMutableList()
         }
