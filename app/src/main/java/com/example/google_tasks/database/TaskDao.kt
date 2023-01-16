@@ -1,12 +1,10 @@
 package com.example.google_tasks.database
 
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.example.google_tasks.models.task.Task
 import java.util.UUID
 
+@Dao
 interface TaskDao {
 
     @Query("SELECT * FROM task")
