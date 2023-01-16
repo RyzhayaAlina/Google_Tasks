@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.google_tasks.databinding.FragmentListBinding
-import com.example.google_tasks.models.task.Task
 
 class ListFragment : Fragment() {
 
     private lateinit var binding: FragmentListBinding
+    private val viewModel: ListViewModel by activityViewModels()
     private val adapter = ListAdapter()
 
     override fun onCreateView(
@@ -27,24 +28,17 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initialRecyclerView()
+
+        viewModel.fetchData()
+
+        viewModel.tasks.observe(viewLifecycleOwner) {
+            adapter.tasks = it.toMutableList()
+        }
     }
 
     private fun initialRecyclerView() {
         binding.tasksRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.tasksRecyclerView.adapter = adapter
-
-        val list = mutableListOf<Task>()
-        list.add(Task(
-            name = "task 0",
-            additInfo = "addit info",
-            isChosen = true))
-        for (i in 1..10) {
-            list.add(Task(
-                name = "task $i",
-                additInfo = "",
-                isChosen = false))
-        }
-        adapter.tasks = list
     }
 
 }
