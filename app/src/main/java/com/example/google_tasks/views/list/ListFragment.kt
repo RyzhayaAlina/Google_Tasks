@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.google_tasks.databinding.FragmentListBinding
+import com.example.google_tasks.models.task.Task
 
 class ListFragment : Fragment() {
 
@@ -21,6 +22,10 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentListBinding.inflate(inflater, container, false)
+
+        binding.createTaskFloatingButton.setOnClickListener {
+            viewModel.createTask(Task(name = "task", additInfo = "addit info", isChosen = false))
+        }
 
         return binding.root
     }
