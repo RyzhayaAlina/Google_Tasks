@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.google_tasks.R
 import com.example.google_tasks.databinding.TaskItemBinding
+import com.example.google_tasks.models.task.Task
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
-    var tasks = mutableListOf<Int>()
+    var tasks = mutableListOf<Task>()
         set(newValue) {
             field = newValue
             notifyDataSetChanged()
@@ -19,11 +20,28 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
         private val binding = TaskItemBinding.bind(view)
 
-        fun bind(task: Int) {
-            binding.completedCheckBox.isChecked = false
-            binding.taskNameTextView.text = task.toString()
-            binding.taskAdditionalTextView.text = "addit"
-            binding.chosenImageButton.setImageResource(R.drawable.ic_chosen_border)
+        fun bind(task: Task) {
+            binding.completedCheckBox.isChecked = task.isCompleted
+            binding.taskNameTextView.text = task.name
+            binding.taskAdditionalTextView.text = task.additInfo
+
+            if (task.isChosen) {
+                binding.chosenImageButton.setImageResource(R.drawable.ic_chosen_full)
+            } else {
+                binding.chosenImageButton.setImageResource(R.drawable.ic_chosen_border)
+            }
+
+            binding.completedCheckBox.setOnCheckedChangeListener { _, isChecked ->
+                task.isCompleted = isChecked
+            }
+            binding.chosenImageButton.setOnClickListener {
+                task.isChosen = !task.isChosen
+                if (task.isChosen) {
+                    binding.chosenImageButton.setImageResource(R.drawable.ic_chosen_full)
+                } else {
+                    binding.chosenImageButton.setImageResource(R.drawable.ic_chosen_border)
+                }
+            }
         }
     }
 

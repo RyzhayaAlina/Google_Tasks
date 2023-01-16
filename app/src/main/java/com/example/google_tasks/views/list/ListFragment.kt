@@ -1,14 +1,13 @@
 package com.example.google_tasks.views.list
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.google_tasks.databinding.FragmentListBinding
+import com.example.google_tasks.models.task.Task
 
 class ListFragment : Fragment() {
 
@@ -34,9 +33,16 @@ class ListFragment : Fragment() {
         binding.tasksRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.tasksRecyclerView.adapter = adapter
 
-        val list = mutableListOf<Int>()
+        val list = mutableListOf<Task>()
+        list.add(Task(
+            name = "task 0",
+            additInfo = "addit info",
+            isChosen = true))
         for (i in 1..10) {
-            list.add(i)
+            list.add(Task(
+                name = "task $i",
+                additInfo = "",
+                isChosen = false))
         }
         adapter.tasks = list
     }

@@ -4,8 +4,8 @@ import java.util.UUID
 
 data class Task(
     val id: UUID = UUID.randomUUID(),
-    val name: String,
-    val additInfo: String,
-    val isCompleted: Boolean = false,
-    val isChosen: Boolean
+    var name: String,
+    var additInfo: String,
+    var isCompleted: Boolean = false,
+    var isChosen: Boolean
 )
