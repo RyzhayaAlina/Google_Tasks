@@ -3,6 +3,7 @@ package com.example.google_tasks.views.detail
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,7 @@ class DetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val taskId = requireArguments().getSerializable(ARG_TASK_ID) as UUID
+        Log.d("tag", "task id $taskId")
         viewModel.loadTask(taskId)
     }
 
@@ -33,15 +35,17 @@ class DetailFragment : Fragment() {
         binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
 
         binding.backImageButton.setOnClickListener {
-            viewModel.updateTask(task)
+            saveTask()
             requireActivity().onBackPressed()
         }
 
         binding.addInComletedButton.setOnClickListener {
             task.isCompleted = !task.isCompleted
             if (task.isCompleted) {
-                viewModel.updateTask(task)
+                saveTask()
                 requireActivity().onBackPressed()
+            } else {
+                saveTask()
             }
         }
 
@@ -60,6 +64,7 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.taskLiveData.observe(viewLifecycleOwner) {
             task = it
+            Log.d("tag", task.toString())
             updateScreen()
         }
     }
@@ -104,6 +109,13 @@ class DetailFragment : Fragment() {
         dialog.setNegativeButton("Отмена", null)
         dialog.setTitle("Вы уверены, что хотите удалить?")
         dialog.show()
+    }
+
+    private fun saveTask() {
+        task.name = binding.nameEditText.text.toString()
+        task.additInfo = binding.additEditText.text.toString()
+        task.isChosen = binding.chosenCheckBox.isChecked
+        viewModel.updateTask(task)
     }
 
     companion object {
