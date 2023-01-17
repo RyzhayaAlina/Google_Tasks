@@ -4,4 +4,7 @@
     <string name="account">Аккаунт</string>
     <string name="more">more</string>
     <string name="create_task">создать задачу</string>
+    <string name="new_task">Новая задача</string>
+    <string name="addit_info">дополнительная информация</string>
+    <string name="save">Сохранить</string>
 </resources>
