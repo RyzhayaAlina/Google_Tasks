@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/yellow">
+    android:background="@color/lightGray">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/yellow">
+        android:background="@color/lightGray">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -48,8 +48,8 @@
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_menu"
         app:navigationIcon="@drawable/ic_menu"
-        android:background="@color/yellow"
-        android:backgroundTint="@color/yellow"
+        android:background="@color/lightGray"
+        android:backgroundTint="@color/lightGray"
         android:layout_gravity="bottom"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add"
         android:contentDescription="@string/create_task"
-        android:backgroundTint="@color/yellow"
+        android:backgroundTint="@color/lightGray"
         app:borderWidth="0dp"
         app:layout_anchor="@id/bottom_bar"/>
 
