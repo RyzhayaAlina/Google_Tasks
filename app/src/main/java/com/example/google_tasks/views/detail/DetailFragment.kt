@@ -33,19 +33,21 @@ class DetailFragment : Fragment() {
         binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
 
         binding.backImageButton.setOnClickListener {
-            //go back
+            viewModel.updateTask(task)
+            requireActivity().onBackPressed()
         }
 
         binding.addInComletedButton.setOnClickListener {
             task.isCompleted = !task.isCompleted
             if (task.isCompleted) {
                 viewModel.updateTask(task)
-                //выхоод
+                requireActivity().onBackPressed()
             }
         }
 
         binding.deleteImageButton.setOnClickListener {
             viewModel.deleteTask()
+            requireActivity().onBackPressed()
         }
 
         return binding.root
