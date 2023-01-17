@@ -14,11 +14,11 @@ import com.example.google_tasks.databinding.FragmentListBinding
 import com.example.google_tasks.models.task.Task
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), ListItemListener {
 
     private lateinit var binding: FragmentListBinding
     private val viewModel: ListViewModel by activityViewModels()
-    private val adapter = ListAdapter()
+    private val adapter = ListAdapter(this)
     private lateinit var createTaskBottomDialog: BottomSheetDialog
 
     override fun onCreateView(
@@ -89,6 +89,14 @@ class ListFragment : Fragment() {
     private fun initialRecyclerView() {
         binding.tasksRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.tasksRecyclerView.adapter = adapter
+    }
+
+    override fun updateTask(task: Task) {
+        viewModel.updateTask(task)
+    }
+
+    override fun showDetail(task: Task) {
+        //show screen detail
     }
 
 }
