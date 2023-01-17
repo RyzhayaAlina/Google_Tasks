@@ -7,4 +7,6 @@
     <string name="new_task">Новая задача</string>
     <string name="addit_info">дополнительная информация</string>
     <string name="save">Сохранить</string>
+    <string name="enter_title">Введите название</string>
+    <string name="mark_completed">Добавить в выполненные</string>
 </resources>
