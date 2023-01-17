@@ -1,10 +1,12 @@
 package com.example.google_tasks.views.detail
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -50,8 +52,7 @@ class DetailFragment : Fragment() {
         }
 
         binding.deleteImageButton.setOnClickListener {
-            viewModel.deleteTask()
-            requireActivity().onBackPressed()
+            showDeleteDialog()
         }
 
         return binding.root
@@ -94,6 +95,17 @@ class DetailFragment : Fragment() {
         binding.chosenCheckBox.isChecked = task.isChosen
         binding.chosenCheckBox.setButtonDrawable(if (task.isChosen) R.drawable.ic_chosen_full else R.drawable.ic_chosen_border)
         binding.addInComletedButton.setText(if (task.isCompleted) R.string.mark_uncompleted else R.string.mark_completed)
+    }
+
+    private fun showDeleteDialog() {
+        val dialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        dialog.setPositiveButton("Да") { _, _ ->
+            viewModel.deleteTask()
+            requireActivity().onBackPressed()
+        }
+        dialog.setNegativeButton("Отмена", null)
+        dialog.setTitle("Вы уверены, что хотите удалить?")
+        dialog.show()
     }
 
     companion object {
