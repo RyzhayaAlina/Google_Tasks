@@ -10,4 +10,7 @@
     <string name="enter_title">Введите название</string>
     <string name="mark_completed">Добавить в выполненные</string>
     <string name="mark_uncompleted">Убрать из выполненных</string>
+    <string name="my_tasks">       Мои задачи</string>
+    <string name="chosen">Избранные</string>
+    <string name="completed">       Выполненные</string>
 </resources>

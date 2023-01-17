@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="4dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="100dp">
+
+        <Button
+            android:id="@+id/chosen_tasks_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/chosen"
+            android:textColor="@color/black"
+            android:drawableLeft="@drawable/ic_chosen_full"
+            android:gravity="start"
+            android:textAllCaps="false"
+            android:background="@color/transparent"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/my_task_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/my_tasks"
+        android:textColor="@color/black"
+        android:textAllCaps="false"
+        android:gravity="start"
+        android:background="@color/transparent"/>
+
+    <Button
+        android:id="@+id/completed_tasks_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/completed"
+        android:textColor="@color/black"
+        android:textAllCaps="false"
+        android:gravity="start"
+        android:background="@color/transparent"/>
+
+
+</LinearLayout>
