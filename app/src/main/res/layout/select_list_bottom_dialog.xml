@@ -5,23 +5,21 @@
     android:layout_height="match_parent"
     android:padding="4dp">
 
-    <androidx.cardview.widget.CardView
+    <Button
+        android:id="@+id/chosen_tasks_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="100dp">
+        android:text="@string/chosen"
+        android:textColor="@color/black"
+        android:drawableLeft="@drawable/ic_chosen_full"
+        android:gravity="start"
+        android:textAllCaps="false"
+        android:background="@color/transparent" />
 
-        <Button
-            android:id="@+id/chosen_tasks_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/chosen"
-            android:textColor="@color/black"
-            android:drawableLeft="@drawable/ic_chosen_full"
-            android:gravity="start"
-            android:textAllCaps="false"
-            android:background="@color/transparent"/>
-
-    </androidx.cardview.widget.CardView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"/>
 
     <Button
         android:id="@+id/my_task_button"
@@ -30,6 +28,7 @@
         android:text="@string/my_tasks"
         android:textColor="@color/black"
         android:textAllCaps="false"
+        android:drawableLeft="@drawable/ic_list"
         android:gravity="start"
         android:background="@color/transparent"/>
 
@@ -40,6 +39,7 @@
         android:text="@string/completed"
         android:textColor="@color/black"
         android:textAllCaps="false"
+        android:drawableLeft="@drawable/ic_done"
         android:gravity="start"
         android:background="@color/transparent"/>
 

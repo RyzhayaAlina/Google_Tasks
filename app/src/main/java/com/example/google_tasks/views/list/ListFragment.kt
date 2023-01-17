@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.google_tasks.R
 import com.example.google_tasks.databinding.CreateTaskBottomDialogBinding
 import com.example.google_tasks.databinding.FragmentListBinding
+import com.example.google_tasks.databinding.SelectListBottomDialogBinding
 import com.example.google_tasks.models.task.Task
 import com.example.google_tasks.views.detail.DetailFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -21,6 +23,7 @@ class ListFragment : Fragment(), ListItemListener {
     private val viewModel: ListViewModel by activityViewModels()
     private val adapter = ListAdapter(this)
     private lateinit var createTaskBottomDialog: BottomSheetDialog
+    private lateinit var selectListBottomDialog: BottomSheetDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,16 +35,35 @@ class ListFragment : Fragment(), ListItemListener {
 
         createTaskBottomDialog = BottomSheetDialog(requireContext(), R.style.BottomDialogStyle)
         createTaskBottomDialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-        createBottomDialog()
+        createCreateBottomDialog()
+
+        selectListBottomDialog = BottomSheetDialog(requireContext(), R.style.BottomDialogStyle)
+        selectListBottomDialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        createSelectListBottomDialog()
 
         binding.createTaskFloatingButton.setOnClickListener {
             createTaskBottomDialog.show()
         }
 
+        binding.bottomBar.setNavigationOnClickListener {
+            selectListBottomDialog.show()
+        }
+
+        binding.bottomBar.setOnMenuItemClickListener { item ->
+
+            when (item.itemId) {
+                R.id.more -> Toast.makeText(requireContext(), "more", Toast.LENGTH_SHORT).show()
+            }
+
+            true
+        }
+
+
+
         return binding.root
     }
 
-    private fun createBottomDialog() {
+    private fun createCreateBottomDialog() {
         val dialogBinding = CreateTaskBottomDialogBinding.inflate(LayoutInflater.from(requireContext()), null, false)
 
         createTaskBottomDialog.setContentView(dialogBinding.root)
@@ -74,8 +96,21 @@ class ListFragment : Fragment(), ListItemListener {
             viewModel.createTask(task)
             createTaskBottomDialog.dismiss()
         }
+    }
 
+    private fun createSelectListBottomDialog() {
+        val dialogBinding = SelectListBottomDialogBinding.inflate(LayoutInflater.from(requireContext()), null, false)
+        selectListBottomDialog.setContentView(dialogBinding.root)
 
+        dialogBinding.chosenTasksButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Chosen", Toast.LENGTH_SHORT).show()
+        }
+        dialogBinding.myTaskButton.setOnClickListener {
+            Toast.makeText(requireContext(), "My task", Toast.LENGTH_SHORT).show()
+        }
+        dialogBinding.completedTasksButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Completed", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
