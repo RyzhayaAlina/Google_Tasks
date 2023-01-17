@@ -29,7 +29,7 @@ class ListFragment : Fragment() {
         binding = FragmentListBinding.inflate(inflater, container, false)
 
 
-        createTaskBottomDialog = BottomSheetDialog(requireContext())
+        createTaskBottomDialog = BottomSheetDialog(requireContext(), R.style.BottomDialogStyle)
         createTaskBottomDialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         createBottomDialog()
 
