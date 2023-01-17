@@ -24,6 +24,14 @@ class InDatabaseTaskRepository private constructor(context: Context) {
         return taskDao.getById(id)
     }
 
+    fun getChosen(): LiveData<List<Task>> {
+        return taskDao.getChosen()
+    }
+
+    fun getCompleted(): LiveData<List<Task>> {
+        return taskDao.getCompleted()
+    }
+
     suspend fun add(task: Task) {
         taskDao.add(task)
     }

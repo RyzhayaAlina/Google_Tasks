@@ -1,6 +1,7 @@
 package com.example.google_tasks.views.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -103,13 +104,30 @@ class ListFragment : Fragment(), ListItemListener {
         selectListBottomDialog.setContentView(dialogBinding.root)
 
         dialogBinding.chosenTasksButton.setOnClickListener {
-            Toast.makeText(requireContext(), "Chosen", Toast.LENGTH_SHORT).show()
+            viewModel.chosenTasks.observe(viewLifecycleOwner) {
+                adapter.tasks = it.toMutableList()
+            }
+            viewModel.myTasks.removeObservers(viewLifecycleOwner)
+            viewModel.completedTask.removeObservers(viewLifecycleOwner)
+            selectListBottomDialog.dismiss()
         }
         dialogBinding.myTaskButton.setOnClickListener {
-            Toast.makeText(requireContext(), "My task", Toast.LENGTH_SHORT).show()
+            viewModel.chosenTasks.removeObservers(viewLifecycleOwner)
+            viewModel.myTasks.observe(viewLifecycleOwner) {
+                adapter.tasks = it.toMutableList()
+            }
+            viewModel.completedTask.removeObservers(viewLifecycleOwner)
+
+            selectListBottomDialog.dismiss()
         }
         dialogBinding.completedTasksButton.setOnClickListener {
-            Toast.makeText(requireContext(), "Completed", Toast.LENGTH_SHORT).show()
+            viewModel.chosenTasks.removeObservers(viewLifecycleOwner)
+            viewModel.myTasks.removeObservers(viewLifecycleOwner)
+            viewModel.completedTask.observe(viewLifecycleOwner) {
+                adapter.tasks = it.toMutableList()
+            }
+
+            selectListBottomDialog.dismiss()
         }
     }
 
@@ -117,7 +135,7 @@ class ListFragment : Fragment(), ListItemListener {
         super.onViewCreated(view, savedInstanceState)
         initialRecyclerView()
 
-        viewModel.tasks.observe(viewLifecycleOwner) {
+        viewModel.myTasks.observe(viewLifecycleOwner) {
             adapter.tasks = it.toMutableList()
         }
     }

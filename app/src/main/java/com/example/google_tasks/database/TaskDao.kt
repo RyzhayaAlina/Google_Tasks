@@ -8,11 +8,17 @@ import java.util.UUID
 @Dao
 interface TaskDao {
 
-    @Query("SELECT * FROM task")
+    @Query("SELECT * FROM task WHERE isCompleted = 0")
     fun getAll(): LiveData<List<Task>>
 
     @Query("SELECT * FROM task WHERE id=(:id)")
     fun getById(id: UUID): LiveData<Task?>
+
+    @Query("SELECT * FROM task WHERE isChosen = 1 AND isCompleted = 0")
+    fun getChosen(): LiveData<List<Task>>
+
+    @Query("SELECT * FROM task WHERE isCompleted = 1")
+    fun getCompleted(): LiveData<List<Task>>
 
     @Insert
     suspend fun add(task: Task)
