@@ -45,6 +45,10 @@ class DetailFragment : Fragment() {
             }
         }
 
+        binding.chosenCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            binding.chosenCheckBox.setButtonDrawable(if (isChecked) R.drawable.ic_chosen_full else R.drawable.ic_chosen_border)
+        }
+
         binding.deleteImageButton.setOnClickListener {
             viewModel.deleteTask()
             requireActivity().onBackPressed()
@@ -88,6 +92,7 @@ class DetailFragment : Fragment() {
         binding.nameEditText.setText(task.name)
         binding.additEditText.setText(task.additInfo)
         binding.chosenCheckBox.isChecked = task.isChosen
+        binding.chosenCheckBox.setButtonDrawable(if (task.isChosen) R.drawable.ic_chosen_full else R.drawable.ic_chosen_border)
         binding.addInComletedButton.setText(if (task.isCompleted) R.string.mark_uncompleted else R.string.mark_completed)
     }
 
