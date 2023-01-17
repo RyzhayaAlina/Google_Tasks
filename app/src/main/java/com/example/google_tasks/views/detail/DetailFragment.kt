@@ -5,12 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import com.example.google_tasks.R
 import com.example.google_tasks.databinding.FragmentTaskDetailBinding
+import com.example.google_tasks.models.task.Task
 import java.util.*
 
 class DetailFragment : Fragment() {
 
     private lateinit var binding: FragmentTaskDetailBinding
+    private val viewModel: DetailVieModel by activityViewModels()
+    private lateinit var task: Task
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val taskId = requireArguments().getSerializable(ARG_TASK_ID) as UUID
+        viewModel.loadTask(taskId)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -18,7 +29,39 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
+
+        binding.backImageButton.setOnClickListener {
+            //go back
+        }
+
+        binding.addInComletedButton.setOnClickListener {
+            task.isCompleted = !task.isCompleted
+            if (task.isCompleted) {
+                viewModel.updateTask(task)
+                //выхоод
+            }
+        }
+
+        binding.deleteImageButton.setOnClickListener {
+            viewModel.deleteTask()
+        }
+
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.taskLiveData.observe(viewLifecycleOwner) {
+            task = it
+            updateScreen()
+        }
+    }
+
+    private fun updateScreen() {
+        binding.nameEditText.setText(task.name)
+        binding.additEditText.setText(task.additInfo)
+        binding.chosenCheckBox.isChecked = task.isChosen
+        binding.addInComletedButton.setText(if (task.isCompleted) R.string.mark_uncompleted else R.string.mark_completed)
     }
 
     companion object {
