@@ -12,6 +12,7 @@ import com.example.google_tasks.R
 import com.example.google_tasks.databinding.CreateTaskBottomDialogBinding
 import com.example.google_tasks.databinding.FragmentListBinding
 import com.example.google_tasks.models.task.Task
+import com.example.google_tasks.views.detail.DetailFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class ListFragment : Fragment(), ListItemListener {
@@ -96,7 +97,10 @@ class ListFragment : Fragment(), ListItemListener {
     }
 
     override fun showDetail(task: Task) {
-        //show screen detail
+        requireActivity().supportFragmentManager.beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.fragment_container, DetailFragment.newInstance(task.id))
+            .commit()
     }
 
 }

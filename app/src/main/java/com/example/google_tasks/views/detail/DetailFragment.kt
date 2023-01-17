@@ -1,6 +1,8 @@
 package com.example.google_tasks.views.detail
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,6 +57,29 @@ class DetailFragment : Fragment() {
             task = it
             updateScreen()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val nameTextWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                task.name = s.toString()
+            }
+        }
+        binding.nameEditText.addTextChangedListener(nameTextWatcher)
+
+        val additTextWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                task.name = s.toString()
+            }
+        }
+        binding.additEditText.addTextChangedListener(additTextWatcher)
     }
 
     private fun updateScreen() {
