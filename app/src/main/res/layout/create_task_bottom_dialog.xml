@@ -22,7 +22,8 @@
         android:textSize="18sp"
         android:textColor="@color/gray"
         tools:text="fdsfsdfds"
-        android:hint="@string/addit_info"/>
+        android:hint="@string/addit_info"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,12 +37,12 @@
             android:src="@drawable/ic_addit_info"
             android:backgroundTint="@color/transparent"/>
 
-        <ImageButton
-            android:id="@+id/add_to_chosen_image_button"
+        <CheckBox
+            android:id="@+id/add_to_chosen_check_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_chosen_border"
-            android:backgroundTint="@color/transparent"/>
+            android:button="@drawable/ic_chosen_border"
+            android:backgroundTint="@color/transparent" />
 
         <Space
             android:layout_width="0dp"
