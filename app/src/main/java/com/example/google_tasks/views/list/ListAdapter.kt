@@ -43,8 +43,8 @@ class ListAdapter(private val listener: ListItemListener) : RecyclerView.Adapter
                 binding.chosenImageButton.setImageResource(R.drawable.ic_chosen_border)
             }
 
-            binding.completedCheckBox.setOnCheckedChangeListener { _, isChecked ->
-                task.isCompleted = isChecked
+            binding.completedCheckBox.setOnClickListener {
+                task.isCompleted = !task.isCompleted
                 listener.updateTask(task)
             }
             binding.chosenImageButton.setOnClickListener {
