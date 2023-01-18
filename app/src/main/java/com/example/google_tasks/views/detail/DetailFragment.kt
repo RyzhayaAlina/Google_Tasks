@@ -23,7 +23,6 @@ class DetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val taskId = requireArguments().getSerializable(ARG_TASK_ID) as UUID
-        Log.d("tag", "task id $taskId")
         viewModel.loadTask(taskId)
     }
 
@@ -64,7 +63,6 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.taskLiveData.observe(viewLifecycleOwner) {
             task = it
-            Log.d("tag", task.toString())
             updateScreen()
         }
     }
