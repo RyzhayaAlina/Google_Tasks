@@ -57,7 +57,7 @@
         android:textColorHighlight="@color/superlightGray"
         android:hint="@string/enter_title"
         android:textSize="20sp"
-        android:drawableStart="@drawable/ic_addit_info" />
+        android:drawableStart="@drawable/ic_addit_info_white" />
 
     <Space
         android:layout_width="0dp"
