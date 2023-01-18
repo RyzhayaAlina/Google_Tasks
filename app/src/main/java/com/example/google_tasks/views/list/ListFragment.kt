@@ -104,6 +104,7 @@ class ListFragment : Fragment(), ListItemListener {
         selectListBottomDialog.setContentView(dialogBinding.root)
 
         dialogBinding.chosenTasksButton.setOnClickListener {
+            binding.mainTitleTasksTextView.setText(R.string.chosen)
             viewModel.chosenTasks.observe(viewLifecycleOwner) {
                 adapter.tasks = it.toMutableList()
             }
@@ -112,6 +113,7 @@ class ListFragment : Fragment(), ListItemListener {
             selectListBottomDialog.dismiss()
         }
         dialogBinding.myTaskButton.setOnClickListener {
+            binding.mainTitleTasksTextView.setText(R.string.my_tasks)
             viewModel.chosenTasks.removeObservers(viewLifecycleOwner)
             viewModel.myTasks.observe(viewLifecycleOwner) {
                 adapter.tasks = it.toMutableList()
@@ -121,6 +123,7 @@ class ListFragment : Fragment(), ListItemListener {
             selectListBottomDialog.dismiss()
         }
         dialogBinding.completedTasksButton.setOnClickListener {
+            binding.mainTitleTasksTextView.setText(R.string.completed)
             viewModel.chosenTasks.removeObservers(viewLifecycleOwner)
             viewModel.myTasks.removeObservers(viewLifecycleOwner)
             viewModel.completedTask.observe(viewLifecycleOwner) {
